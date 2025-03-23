@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Display</title>
+    <style>
+        canvas { border: 1px solid #ccc; }
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 20px 0;
+        }
+        /* 新增总时间控件样式 */
+        .total-time-control {
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #totalTimeSlider {
+            width: 120px;
+        }
+        .speed-control {
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #speedSlider {
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button onclick="testDisplay()">演示</button>
+        <button id="playBtn" onclick="window.display.togglePlay()">播放</button>
+        <!-- 新增总时间控件 -->
+        <div class="total-time-control">
+            <label>总时间：</label>
+            <input type="range" id="totalTimeSlider" min="1" max="60" step="1" value="10" 
+                   oninput="window.updateTotalTime(this.value)">
+            <span id="totalTimeValue">10 s</span>
+        </div>
+        <!-- 原速度控件保持不变 -->
+        <div class="speed-control">
+            <label>播放速度：</label>
+            <input type="range" id="speedSlider" min="0.1" max="20" step="0.1" value="0.1" 
+                   oninput="window.updateSpeed(this.value)">  <!-- 添加 window. 前缀 -->
+            <span id="speedValue">1x</span>
+        </div>
+    </div>
+    <canvas id="displayCanvas" width="800" height="500"></canvas>
+    
+    <!-- 新增数据日志容器 -->
+    <div id="dataLog" style="
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 300px;
+        height: 200px;
+        background: rgba(255,255,255,0.9);
+        border: 1px solid #ddd;
+        padding: 10px;
+        overflow-y: auto;
+        font-family: monospace;
+        font-size: 12px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    ">
+        <div style="color: #666; margin-bottom: 5px;">日志：</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
